@@ -37,10 +37,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/prettier", "npm:2.4.4"],\
+            ["@types/webpack-env", "npm:1.16.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["eslint", "npm:8.12.0"],\
-            ["nollup", "npm:0.19.0"],\
+            ["nollup", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."],\
             ["prettier", "npm:2.6.1"],\
             ["rollup", "npm:2.70.1"],\
             ["rollup-plugin-userscript", "npm:0.1.1"],\
@@ -225,22 +226,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "rollup"\
           ],\
           "linkType": "HARD"\
-        }],\
-        ["virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:3.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/@rollup-pluginutils-virtual-0eeada45f4/0/cache/@rollup-pluginutils-npm-3.1.0-b44b222e7d-8be16e2786.zip/node_modules/@rollup/pluginutils/",\
-          "packageDependencies": [\
-            ["@rollup/pluginutils", "virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:3.1.0"],\
-            ["@types/estree", "npm:0.0.39"],\
-            ["@types/rollup", null],\
-            ["estree-walker", "npm:1.0.1"],\
-            ["picomatch", "npm:2.3.1"],\
-            ["rollup", null]\
-          ],\
-          "packagePeers": [\
-            "@types/rollup",\
-            "rollup"\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["@tootallnate/once", [\
@@ -302,6 +287,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-prettier-npm-2.4.4-bab324963d-2c2cc57efd.zip/node_modules/@types/prettier/",\
           "packageDependencies": [\
             ["@types/prettier", "npm:2.4.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/webpack-env", [\
+        ["npm:1.16.3", {\
+          "packageLocation": "./.yarn/cache/@types-webpack-env-npm-1.16.3-0fd64e1f17-faefa7c0a7.zip/node_modules/@types/webpack-env/",\
+          "packageDependencies": [\
+            ["@types/webpack-env", "npm:1.16.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1948,10 +1942,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/prettier", "npm:2.4.4"],\
+            ["@types/webpack-env", "npm:1.16.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["eslint", "npm:8.12.0"],\
-            ["nollup", "npm:0.19.0"],\
+            ["nollup", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."],\
             ["prettier", "npm:2.6.1"],\
             ["rollup", "npm:2.70.1"],\
             ["rollup-plugin-userscript", "npm:0.1.1"],\
@@ -2290,11 +2285,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["nollup", [\
-        ["npm:0.19.0", {\
-          "packageLocation": "./.yarn/cache/nollup-npm-0.19.0-b75943938a-c9ada2812a.zip/node_modules/nollup/",\
+        ["patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A.", {\
+          "packageLocation": "./.yarn/cache/nollup-patch-3dc82024eb-98210c04da.zip/node_modules/nollup/",\
           "packageDependencies": [\
-            ["nollup", "npm:0.19.0"],\
-            ["@rollup/pluginutils", "virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:3.1.0"],\
+            ["nollup", "patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A.", {\
+          "packageLocation": "./.yarn/__virtual__/nollup-virtual-a966fa161d/0/cache/nollup-patch-3dc82024eb-98210c04da.zip/node_modules/nollup/",\
+          "packageDependencies": [\
+            ["nollup", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."],\
+            ["@rollup/pluginutils", "virtual:0a11a4cb2bce52478fa65094a41ce881ac1f63fe58163b00aaea3dfeb0a0ac7e0bfafa5ecd7b3951166333cc2b91ea33ba12395ea1f6dba3e1b4a153eab48cff#npm:3.1.0"],\
+            ["@types/rollup", null],\
             ["acorn", "npm:8.7.0"],\
             ["chokidar", "npm:3.5.3"],\
             ["convert-source-map", "npm:1.8.0"],\
@@ -2303,12 +2306,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express-http-proxy", "npm:1.6.3"],\
             ["magic-string", "npm:0.25.9"],\
             ["mime-types", "npm:2.1.35"],\
+            ["rollup", "npm:2.70.1"],\
             ["source-map", "npm:0.5.7"],\
             ["source-map-fast", [\
               "source-map",\
               "npm:0.7.3"\
             ]],\
-            ["ws", "virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:7.5.7"]\
+            ["ws", "virtual:a966fa161df4bebc70bbcaa8f84e89b712209375e4ae585b9c4989d925fbe90a5167e60a373e83735107636561ba99589e70a2a67b5da3627b119e4765faee49#npm:7.5.7"]\
+          ],\
+          "packagePeers": [\
+            "@types/rollup",\
+            "rollup"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3229,10 +3237,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:7.5.7", {\
-          "packageLocation": "./.yarn/__virtual__/ws-virtual-4d97e2ccbf/0/cache/ws-npm-7.5.7-6cc440864a-5c1f669a16.zip/node_modules/ws/",\
+        ["virtual:a966fa161df4bebc70bbcaa8f84e89b712209375e4ae585b9c4989d925fbe90a5167e60a373e83735107636561ba99589e70a2a67b5da3627b119e4765faee49#npm:7.5.7", {\
+          "packageLocation": "./.yarn/__virtual__/ws-virtual-c1ce005290/0/cache/ws-npm-7.5.7-6cc440864a-5c1f669a16.zip/node_modules/ws/",\
           "packageDependencies": [\
-            ["ws", "virtual:b75943938a5bb63ea5a3f16cd2e078ff25f0cd892849171dc7a208a92079799f0a0bf6763c37fbce8c042d8c21a7100dd8b4b39a9aefdd90494c29fc34a1a315#npm:7.5.7"],\
+            ["ws", "virtual:a966fa161df4bebc70bbcaa8f84e89b712209375e4ae585b9c4989d925fbe90a5167e60a373e83735107636561ba99589e70a2a67b5da3627b119e4765faee49#npm:7.5.7"],\
             ["@types/bufferutil", null],\
             ["@types/utf-8-validate", null],\
             ["bufferutil", null],\
