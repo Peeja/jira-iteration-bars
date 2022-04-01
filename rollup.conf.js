@@ -1,4 +1,3 @@
-import type { RollupOptions } from "rollup";
 import userscript from "rollup-plugin-userscript";
 import typescript from "@rollup/plugin-typescript";
 import * as path from "path";
@@ -7,7 +6,8 @@ import * as pkg from "./package.json";
 const DIST = "dist";
 const FILENAME = "index";
 
-const config: RollupOptions = {
+/** @type {import("rollup").RollupOptions} */
+const config = {
   input: "src/index.ts",
   plugins: [
     typescript(),
