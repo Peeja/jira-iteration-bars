@@ -1,18 +1,18 @@
-const sparkboardizedElements = new WeakSet<Element>();
+const enhancedElements = new WeakSet<Element>();
 
-const shadow = (element: Element) => {
-  if (element.shadowRoot && !sparkboardizedElements.has(element)) {
+const enhanceElement = (element: Element) => {
+  if (element.shadowRoot && !enhancedElements.has(element)) {
     console.error("Element already has a shadowRoot:", element);
     return;
   } else {
-    sparkboardizedElements.add(element);
+    enhancedElements.add(element);
     const shadowRoot =
       element.shadowRoot ?? element.attachShadow({ mode: "open" });
     shadowRoot.innerHTML = `Hello, world!`;
   }
 };
 
-const sparkboardize = (
+const enhance = (
   // Be selective in what we require, because it's hard to make the various
   // concepts of "Window" agree on everything.
   win: Pick<typeof window, "document" | "MutationObserver" | "Element">,
@@ -20,7 +20,7 @@ const sparkboardize = (
   const selector = "h1";
 
   win.document.querySelectorAll(selector).forEach((heading) => {
-    shadow(heading);
+    enhanceElement(heading);
   });
 
   const observer = new win.MutationObserver(function (mutations) {
@@ -28,11 +28,11 @@ const sparkboardize = (
       mutation.addedNodes.forEach((node) => {
         if (node instanceof win.Element) {
           if (node.matches(selector)) {
-            shadow(node);
+            enhanceElement(node);
           }
 
           node.querySelectorAll(selector).forEach((child) => {
-            shadow(child);
+            enhanceElement(child);
           });
         }
       });
@@ -42,4 +42,4 @@ const sparkboardize = (
   observer.observe(win.document.body, { childList: true, subtree: true });
 };
 
-export default sparkboardize;
+export default enhance;

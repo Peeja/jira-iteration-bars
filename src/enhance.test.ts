@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import mockConsole from "jest-mock-console";
 
-import sparkboardize from "./sparkboardize";
+import enhance from "./enhance";
 
 const waitForEvents = () =>
   new Promise<void>((resolve) => {
@@ -10,11 +10,11 @@ const waitForEvents = () =>
     }, 0);
   });
 
-describe("sparkboardize", () => {
-  it("shadows existing elements", () => {
+describe("enhance()", () => {
+  it("enhances existing elements", () => {
     const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
 
-    sparkboardize(win);
+    enhance(win);
 
     expect(win.document.querySelector("h1")).toBeShadowed(
       (shadowRoot: ShadowRoot) => {
@@ -24,10 +24,10 @@ describe("sparkboardize", () => {
     expect(win.document.querySelector("h2")).not.toBeShadowed();
   });
 
-  it("shadows elements added later", async () => {
+  it("enhances elements added later", async () => {
     const { window: win } = new JSDOM();
 
-    sparkboardize(win);
+    enhance(win);
     win.document.body.innerHTML = `<h1>Hello</h1><h2>world</h2>`;
     await waitForEvents();
 
@@ -40,10 +40,10 @@ describe("sparkboardize", () => {
     expect(win.document.querySelector("h2")).not.toBeShadowed();
   });
 
-  it("shadows children of elements added later", async () => {
+  it("enhances children of elements added later", async () => {
     const { window: win } = new JSDOM(`<!DOCTYPE html>`);
 
-    sparkboardize(win);
+    enhance(win);
     win.document.body.innerHTML = `<div><h1>Hello</h1><h2>world</h2></div>`;
     await waitForEvents();
 
@@ -64,7 +64,7 @@ describe("sparkboardize", () => {
     shadowRoot.innerHTML = "Hi there.";
     const restoreConsole = mockConsole("error");
 
-    sparkboardize(win);
+    enhance(win);
 
     expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
       expect(shadowRoot.innerHTML).toBe("Hi there.");
@@ -80,10 +80,10 @@ describe("sparkboardize", () => {
   it("re-shadows an element it has already shadowed", () => {
     const { window: win } = new JSDOM(`<h1>Hello</h1>`);
     const h1 = win.document.querySelector("h1");
-    sparkboardize(win);
+    enhance(win);
     const restoreConsole = mockConsole("error");
 
-    sparkboardize(win);
+    enhance(win);
 
     expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
       expect(shadowRoot.innerHTML).toBe("Hello, world!");

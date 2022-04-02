@@ -1,6 +1,6 @@
-import sparkboardize from "./sparkboardize";
+import enhance from "./enhance";
 
-sparkboardize(window);
+enhance(window);
 
 if (module?.hot) {
   module.hot.accept(() => {
