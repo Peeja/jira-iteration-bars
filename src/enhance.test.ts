@@ -14,7 +14,13 @@ describe("enhance()", () => {
   it("enhances existing elements", () => {
     const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
 
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
 
     expect(win.document.querySelector("h1")).toBeShadowed(
       (shadowRoot: ShadowRoot) => {
@@ -27,7 +33,13 @@ describe("enhance()", () => {
   it("enhances elements added later", async () => {
     const { window: win } = new JSDOM();
 
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
     win.document.body.innerHTML = `<h1>Hello</h1><h2>world</h2>`;
     await waitForEvents();
 
@@ -43,7 +55,13 @@ describe("enhance()", () => {
   it("enhances children of elements added later", async () => {
     const { window: win } = new JSDOM(`<!DOCTYPE html>`);
 
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
     win.document.body.innerHTML = `<div><h1>Hello</h1><h2>world</h2></div>`;
     await waitForEvents();
 
@@ -64,7 +82,13 @@ describe("enhance()", () => {
     shadowRoot.innerHTML = "Hi there.";
     const restoreConsole = mockConsole("error");
 
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
 
     expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
       expect(shadowRoot.innerHTML).toBe("Hi there.");
@@ -80,10 +104,22 @@ describe("enhance()", () => {
   it("re-shadows an element it has already shadowed", () => {
     const { window: win } = new JSDOM(`<h1>Hello</h1>`);
     const h1 = win.document.querySelector("h1");
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
     const restoreConsole = mockConsole("error");
 
-    enhance(win);
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
 
     expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
       expect(shadowRoot.innerHTML).toBe("Hello, world!");

@@ -1,6 +1,9 @@
 const enhancedElements = new WeakSet<Element>();
 
-const enhanceElement = (element: Element) => {
+const enhanceElement = (
+  element: Element,
+  customizeShadow: (shadowRoot: ShadowRoot) => void,
+) => {
   if (element.shadowRoot && !enhancedElements.has(element)) {
     console.error("Element already has a shadowRoot:", element);
     return;
@@ -8,19 +11,19 @@ const enhanceElement = (element: Element) => {
     enhancedElements.add(element);
     const shadowRoot =
       element.shadowRoot ?? element.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `Hello, world!`;
+    customizeShadow(shadowRoot);
   }
 };
 
 const enhance = (
+  selector: string,
+  customizeShadow: (shadowRoot: ShadowRoot) => void,
   // Be selective in what we require, because it's hard to make the various
   // concepts of "Window" agree on everything.
   win: Pick<typeof window, "document" | "MutationObserver" | "Element">,
 ) => {
-  const selector = "h1";
-
   win.document.querySelectorAll(selector).forEach((heading) => {
-    enhanceElement(heading);
+    enhanceElement(heading, customizeShadow);
   });
 
   const observer = new win.MutationObserver(function (mutations) {
@@ -28,11 +31,11 @@ const enhance = (
       mutation.addedNodes.forEach((node) => {
         if (node instanceof win.Element) {
           if (node.matches(selector)) {
-            enhanceElement(node);
+            enhanceElement(node, customizeShadow);
           }
 
           node.querySelectorAll(selector).forEach((child) => {
-            enhanceElement(child);
+            enhanceElement(child, customizeShadow);
           });
         }
       });

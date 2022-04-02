@@ -1,6 +1,12 @@
 import enhance from "./enhance";
 
-enhance(window);
+enhance(
+  "h1",
+  (shadowRoot: ShadowRoot) => {
+    shadowRoot.innerHTML = `Hello, world!`;
+  },
+  window,
+);
 
 if (module?.hot) {
   module.hot.accept(() => {
