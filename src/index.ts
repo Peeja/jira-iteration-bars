@@ -1,4 +1,6 @@
-console.log("hi there!");
+import sparkboardize from "./sparkboardize";
+
+sparkboardize(window);
 
 if (module?.hot) {
   module.hot.accept(() => {

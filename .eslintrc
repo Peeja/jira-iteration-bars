@@ -9,7 +9,13 @@
       "extends": [
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ]
+      ],
+      "rules": {
+        "@typescript-eslint/no-namespace": [
+          "warn",
+          { "allowDeclarations": true }
+        ]
+      }
     },
     {
       "files": "rollup.conf.js",
