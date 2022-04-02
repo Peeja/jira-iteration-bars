@@ -3391,6 +3391,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-mock-console@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "jest-mock-console@npm:1.2.3"
+  peerDependencies:
+    jest: ">= 22.4.2"
+  checksum: 16f449e309919309b87b6ffb7171ff1feccb628bac97c44aa59594951447833abaaac4957be4258e1c7ce3c54ef6e24cb1e2a7c310f7b8cbc6b598323819dc10
+  languageName: node
+  linkType: hard
+
 "jest-mock@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-mock@npm:27.5.1"
@@ -3636,6 +3645,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.17.0
     eslint: ^8.12.0
     jest: ^27.5.1
+    jest-mock-console: ^1.2.3
     jsdom: ^19.0.0
     nollup: "patch:nollup@npm:0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch"
     prettier: ^2.6.1

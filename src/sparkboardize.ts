@@ -1,5 +1,10 @@
-const shadow = (heading: Element) => {
-  heading.attachShadow({ mode: "open" });
+const shadow = (element: Element) => {
+  if (element.shadowRoot) {
+    console.error("Element already has a shadowRoot:", element);
+  } else {
+    const shadowRoot = element.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `Hello, world!`;
+  }
 };
 
 const sparkboardize = (

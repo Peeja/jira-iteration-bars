@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["eslint", "npm:8.12.0"],\
             ["jest", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:27.5.1"],\
+            ["jest-mock-console", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:1.2.3"],\
             ["jsdom", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:19.0.0"],\
             ["nollup", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."],\
             ["prettier", "npm:2.6.1"],\
@@ -4452,6 +4453,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["jest-mock-console", [\
+        ["npm:1.2.3", {\
+          "packageLocation": "./.yarn/cache/jest-mock-console-npm-1.2.3-1e704485b0-16f449e309.zip/node_modules/jest-mock-console/",\
+          "packageDependencies": [\
+            ["jest-mock-console", "npm:1.2.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:1.2.3", {\
+          "packageLocation": "./.yarn/__virtual__/jest-mock-console-virtual-bb2aec6a8d/0/cache/jest-mock-console-npm-1.2.3-1e704485b0-16f449e309.zip/node_modules/jest-mock-console/",\
+          "packageDependencies": [\
+            ["jest-mock-console", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:1.2.3"],\
+            ["@types/jest", "npm:27.4.1"],\
+            ["jest", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:27.5.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/jest",\
+            "jest"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["jest-pnp-resolver", [\
         ["npm:1.2.2", {\
           "packageLocation": "./.yarn/cache/jest-pnp-resolver-npm-1.2.2-da20f8bdfe-bd85dcc0e7.zip/node_modules/jest-pnp-resolver/",\
@@ -4692,6 +4715,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.17.0"],\
             ["eslint", "npm:8.12.0"],\
             ["jest", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:27.5.1"],\
+            ["jest-mock-console", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:1.2.3"],\
             ["jsdom", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:19.0.0"],\
             ["nollup", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#patch:nollup@npm%3A0.19.0#.yarn/patches/nollup-npm-0.19.0-b75943938a.patch::version=0.19.0&hash=bd5e85&locator=jira-sparkboard%40workspace%3A."],\
             ["prettier", "npm:2.6.1"],\
