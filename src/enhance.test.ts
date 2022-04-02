@@ -101,13 +101,86 @@ describe("enhance()", () => {
     restoreConsole();
   });
 
-  it("re-shadows an element it has already shadowed", () => {
-    const { window: win } = new JSDOM(`<h1>Hello</h1>`);
-    const h1 = win.document.querySelector("h1");
-    enhance(
+  it("returns a function which dehances the elements", () => {
+    const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
+    const dehance = enhance(
       "h1",
       (shadowRoot: ShadowRoot) => {
         shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hello, world!");
+      },
+    );
+
+    dehance();
+
+    // Notably, the element is still shadowed, as there's no way to remove a
+    // shadowRoot once added, but the shadow is a noop slot.
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("<slot></slot>");
+      },
+    );
+  });
+
+  it("re-enhances a dehanced element", () => {
+    const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
+    const dehance = enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hello, world!");
+      },
+    );
+    dehance();
+    const restoreConsole = mockConsole("error");
+
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hi, there!`;
+      },
+      win,
+    );
+
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hi, there!");
+      },
+    );
+    expect(console.error).not.toHaveBeenCalled();
+
+    restoreConsole();
+  });
+
+  it("ignores re-enhanced elements as well", () => {
+    const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
+    const dehance = enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+      },
+      win,
+    );
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hello, world!");
+      },
+    );
+    dehance();
+    enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hi, there!`;
       },
       win,
     );
@@ -116,15 +189,20 @@ describe("enhance()", () => {
     enhance(
       "h1",
       (shadowRoot: ShadowRoot) => {
-        shadowRoot.innerHTML = `Hello, world!`;
+        shadowRoot.innerHTML = `Ahoy, friend!`;
       },
       win,
     );
 
-    expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
-      expect(shadowRoot.innerHTML).toBe("Hello, world!");
-    });
-    expect(console.error).not.toHaveBeenCalled();
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hi, there!");
+      },
+    );
+    expect(console.error).toHaveBeenCalledWith(
+      "Element already has a shadowRoot:",
+      win.document.querySelector("h1"),
+    );
 
     restoreConsole();
   });
