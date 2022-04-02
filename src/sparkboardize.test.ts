@@ -76,4 +76,20 @@ describe("sparkboardize", () => {
 
     restoreConsole();
   });
+
+  it("re-shadows an element it has already shadowed", () => {
+    const { window: win } = new JSDOM(`<h1>Hello</h1>`);
+    const h1 = win.document.querySelector("h1");
+    sparkboardize(win);
+    const restoreConsole = mockConsole("error");
+
+    sparkboardize(win);
+
+    expect(h1).toBeShadowed((shadowRoot: ShadowRoot) => {
+      expect(shadowRoot.innerHTML).toBe("Hello, world!");
+    });
+    expect(console.error).not.toHaveBeenCalled();
+
+    restoreConsole();
+  });
 });

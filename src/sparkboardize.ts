@@ -1,8 +1,13 @@
+const sparkboardizedElements = new WeakSet<Element>();
+
 const shadow = (element: Element) => {
-  if (element.shadowRoot) {
+  if (element.shadowRoot && !sparkboardizedElements.has(element)) {
     console.error("Element already has a shadowRoot:", element);
+    return;
   } else {
-    const shadowRoot = element.attachShadow({ mode: "open" });
+    sparkboardizedElements.add(element);
+    const shadowRoot =
+      element.shadowRoot ?? element.attachShadow({ mode: "open" });
     shadowRoot.innerHTML = `Hello, world!`;
   }
 };
