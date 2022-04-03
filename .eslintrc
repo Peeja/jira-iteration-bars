@@ -14,7 +14,8 @@
         "@typescript-eslint/no-namespace": [
           "warn",
           { "allowDeclarations": true }
-        ]
+        ],
+        "@typescript-eslint/no-empty-function": "warn"
       }
     },
     {
