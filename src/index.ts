@@ -1,16 +1,27 @@
 import enhance from "./enhance";
 
-enhance(
+const dehance = enhance(
   "h1",
-  (shadowRoot: ShadowRoot) => {
+  (shadowRoot: ShadowRoot): void => {
     shadowRoot.innerHTML = `Hello, world!`;
   },
   window,
 );
 
+// Hot Module Replacement Support:
+
+interface NollupModule extends Omit<NodeModule, "hot"> {
+  hot: {
+    accept(callback?: (info: { disposed: number[] }) => void): void;
+    dispose(callback: () => void): void;
+  };
+}
+
+declare const module: NollupModule | undefined;
+
 if (module?.hot) {
-  module.hot.accept(() => {
-    console.log("Reloading...");
-    window.location.reload();
+  module.hot.accept();
+  module.hot.dispose(() => {
+    dehance();
   });
 }
