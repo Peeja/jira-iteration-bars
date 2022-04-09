@@ -1,9 +1,19 @@
+import { createRoot, Root } from "react-dom/client";
 import enhance from "./enhance";
+
+const Component = () => (
+  <>
+    <span style={{ color: "red" }}>Hello</span>, world!
+  </>
+);
+
+let root: Root;
 
 const dehance = enhance(
   "h1",
   (shadowRoot: ShadowRoot): void => {
-    shadowRoot.innerHTML = `Hello, world!`;
+    root = createRoot(shadowRoot);
+    root.render(<Component />);
   },
   window,
 );
@@ -22,6 +32,7 @@ declare const module: NollupModule | undefined;
 if (module?.hot) {
   module.hot.accept();
   module.hot.dispose(() => {
+    root.unmount();
     dehance();
   });
 }

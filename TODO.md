@@ -6,14 +6,16 @@ Project Description
 
 ### Todo
 
-- [ ] HMR scheme for shadow DOM  
+- [ ] Use React Fast Refresh  
 - [ ] ⏳ Send nollup patch (or better equivalent) upstream.  
 
 ### In Progress
 
-- [ ] Get shadow DOM overriding working  
 
 ### Done ✓
 
+- [x] Enhance with React component  
+- [x] Get shadow DOM overriding working  
 - [x] Get code to reload on save.  
+- [x] HMR scheme for shadow DOM  
 
