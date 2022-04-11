@@ -1,0 +1,27 @@
+Add types to pnp-webpack-plugin.
+
+diff --git a/index.d.ts b/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..3964255c26bce443327fd97c594964e5cdf2ed7f
+--- /dev/null
++++ b/index.d.ts
+@@ -0,0 +1,7 @@
++import { ResolvePluginInstance } from "webpack";
++
++const PnpWebpackPlugin: {
++  moduleLoader: (module: NodeModule) => ResolvePluginInstance;
++};
++
++export = PnpWebpackPlugin;
+diff --git a/package.json b/package.json
+index 71324d8c2b82a926c6f33dfd420c6bbc0d46dbc5..3bf2061a70272f8457411c86066e714609dd31ed 100644
+--- a/package.json
++++ b/package.json
+@@ -20,6 +20,7 @@
+         "plugnplay",
+         "pnp"
+     ],
++    "types": "./index.d.ts",
+     "dependencies": {
+         "ts-pnp": "^1.1.6"
+     },
