@@ -1,0 +1,13 @@
+diff --git a/lib/plugin-hmr.js b/lib/plugin-hmr.js
+index a1b13b41cec0236b217fc168f2cc31af66b855fc..b832d4ac09befe3990a3ba3bd3d533f088152c33 100644
+--- a/lib/plugin-hmr.js
++++ b/lib/plugin-hmr.js
+@@ -16,7 +16,7 @@ module.exports = function (options = { bundleId: '' }) {
+                 var ws;
+ 
+                 if (typeof WebSocket === 'function') {
+-                    var protocol =  __nollup__global__.location.protocol === 'https:' ? 'wss://' : 'ws://';
++                    var protocol = 'ws://';
+                     ws = new WebSocket(protocol + ${options.hmrHost? `'${options.hmrHost}'` : '__nollup__global__.location.host'} + '/__hmr${bundleId}');
+                 }
+ 

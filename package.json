@@ -1,5 +1,7 @@
 {
   "name": "jira-sparkboard",
+  "author": "Petra Jaros <peeja@peeja.com>",
+  "version": "0.0.0",
   "packageManager": "yarn@3.2.0",
   "private": true,
   "scripts": {
@@ -9,15 +11,22 @@
     "lint": "eslint --ext .ts,.tsx ."
   },
   "devDependencies": {
+    "@jest/types": "^27.5.1",
     "@types/eslint": "^8",
+    "@types/jest": "^27.4.1",
+    "@types/jsdom": "^16.2.14",
     "@types/node": "^17.0.23",
     "@types/prettier": "^2",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.13.0",
+    "jest": "^27.5.1",
+    "jest-mock-console": "^1.2.3",
+    "jsdom": "^19.0.0",
     "pnp-webpack-plugin": "patch:pnp-webpack-plugin@npm:1.7.0#.yarn/patches/pnp-webpack-plugin-npm-1.7.0-f6c94efb72.patch",
     "prettier": "^2.6.2",
+    "ts-jest": "^27.1.4",
     "ts-loader": "^8.3.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
