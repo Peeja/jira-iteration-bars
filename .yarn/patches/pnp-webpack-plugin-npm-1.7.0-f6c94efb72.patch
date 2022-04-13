@@ -8,7 +8,7 @@ index 0000000000000000000000000000000000000000..3964255c26bce443327fd97c594964e5
 @@ -0,0 +1,7 @@
 +import { ResolvePluginInstance } from "webpack";
 +
-+const PnpWebpackPlugin: {
++const PnpWebpackPlugin: ResolvePluginInstance & {
 +  moduleLoader: (module: NodeModule) => ResolvePluginInstance;
 +};
 +
