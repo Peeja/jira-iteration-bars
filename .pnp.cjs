@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@types/prettier", "npm:2.6.0"],\
             ["@types/webpack", "npm:5.28.0"],\
+            ["@types/webpack-env", "npm:1.16.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.18.0"],\
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.18.0"],\
             ["eslint", "npm:8.13.0"],\
@@ -1652,6 +1653,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["tapable", "npm:2.2.1"],\
             ["webpack", "virtual:0dc39cc4ef61d567603f290f8f6843eb6bb61bf7f813e471f2f9de7908c2b1d306c65b6fa7bbd8b0f136e208f43b13693ebd7f95d78e78267b51265185927418#npm:5.72.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/webpack-env", [\
+        ["npm:1.16.3", {\
+          "packageLocation": "./.yarn/cache/@types-webpack-env-npm-1.16.3-0fd64e1f17-faefa7c0a7.zip/node_modules/@types/webpack-env/",\
+          "packageDependencies": [\
+            ["@types/webpack-env", "npm:1.16.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7114,6 +7124,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@types/prettier", "npm:2.6.0"],\
             ["@types/webpack", "npm:5.28.0"],\
+            ["@types/webpack-env", "npm:1.16.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.18.0"],\
             ["@typescript-eslint/parser", "virtual:aef6c39c17437de5dc3bd46bc7d896a4a6a60aaec06dd9d03f1e4f511ff100a34b119b4de92ef489fc391827a7b873c4afa73e1234eea665204762c6f08b17ae#npm:5.18.0"],\
             ["eslint", "npm:8.13.0"],\

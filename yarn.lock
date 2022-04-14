@@ -1112,6 +1112,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack-env@npm:^1.16.3":
+  version: 1.16.3
+  resolution: "@types/webpack-env@npm:1.16.3"
+  checksum: faefa7c0a75289fb469b9a5ae44059a00009de840e0e62d13b3f837d77647da76808e7839cdc414b8c585969cf6b6a7f290dc2cb437a9ccdf04cb214c68f3223
+  languageName: node
+  linkType: hard
+
 "@types/webpack@npm:^5.28.0":
   version: 5.28.0
   resolution: "@types/webpack@npm:5.28.0"
@@ -5765,6 +5772,7 @@ __metadata:
     "@types/node": ^17.0.23
     "@types/prettier": ^2
     "@types/webpack": ^5.28.0
+    "@types/webpack-env": ^1.16.3
     "@typescript-eslint/eslint-plugin": ^5.18.0
     "@typescript-eslint/parser": ^5.18.0
     eslint: ^8.13.0

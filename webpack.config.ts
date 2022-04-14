@@ -10,7 +10,12 @@ const config: Configuration = {
   devtool: "inline-source-map",
 
   devServer: {
-    static: "./dist",
+    server: "https",
+    allowedHosts: "all",
+    hot: true,
+    client: {
+      webSocketURL: "auto://localhost:8080/ws",
+    },
   },
 
   module: {
