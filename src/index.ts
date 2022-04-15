@@ -10,9 +10,9 @@ const dehance = enhance(
 
 // Hot Module Replacement Support:
 
-// if (module.hot) {
-//   module.hot.accept();
-//   module.hot.dispose(() => {
-//     dehance();
-//   });
-// }
+if (module.hot) {
+  module.hot.dispose(() => {
+    dehance();
+  });
+  module.hot.accept();
+}
