@@ -127,6 +127,35 @@ describe("enhance()", () => {
     );
   });
 
+  it("runs any given cleanup function when dehancing", () => {
+    const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
+    let innerHTMLWhenCleanedUp: string | undefined;
+    const dehance = enhance(
+      "h1",
+      (shadowRoot: ShadowRoot) => {
+        shadowRoot.innerHTML = `Hello, world!`;
+        return () => {
+          innerHTMLWhenCleanedUp = shadowRoot.innerHTML;
+        };
+      },
+      win,
+    );
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("Hello, world!");
+      },
+    );
+
+    dehance();
+
+    expect(innerHTMLWhenCleanedUp).toBe("Hello, world!");
+    expect(win.document.querySelector("h1")).toBeShadowed(
+      (shadowRoot: ShadowRoot) => {
+        expect(shadowRoot.innerHTML).toBe("<slot></slot>");
+      },
+    );
+  });
+
   it("re-enhances a dehanced element", () => {
     const { window: win } = new JSDOM(`<h1>Hello</h1><h2>world</h2>`);
     const dehance = enhance(
