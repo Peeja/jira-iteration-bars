@@ -24,6 +24,9 @@ const enhanceElement = (
     dehancedElements.delete(element);
     const shadowRoot =
       element.shadowRoot ?? element.attachShadow({ mode: "open" });
+    while (shadowRoot.firstChild) {
+      shadowRoot.removeChild(shadowRoot.firstChild);
+    }
     customizeShadow(shadowRoot);
   }
 };

@@ -18,6 +18,8 @@
     "@types/jsdom": "^16.2.14",
     "@types/node": "^17.0.23",
     "@types/prettier": "^2",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
     "@types/webpack": "^4.41.32",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
@@ -36,5 +38,9 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
     "webpack-userscript": "^2.5.8"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }

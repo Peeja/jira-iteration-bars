@@ -147,6 +147,8 @@ describe("enhance()", () => {
     enhance(
       "h1",
       (shadowRoot: ShadowRoot) => {
+        shadowRoot.childNodes; /*?*/
+        expect(shadowRoot.innerHTML).toBe("");
         shadowRoot.innerHTML = `Hi, there!`;
       },
       win,

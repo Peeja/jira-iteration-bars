@@ -1,20 +1,47 @@
 import { resolve } from "path";
-import { Configuration, HotModuleReplacementPlugin } from "webpack";
+import { Configuration } from "webpack";
 import PnpWebpackPlugin = require("pnp-webpack-plugin");
 import WebpackUserscript = require("webpack-userscript");
 import "webpack-dev-server";
+
+/**
+ * Selects a port in the Ephemeral range by deterministically hashing a string
+ * name. That is, for any given name, the returned port number is:
+ *
+ * 1. in the Ephemeral range,
+ * 2. always returned for the given name, and
+ * 3. unlikely in practice to be returned for any other name.
+ *
+ * @param name The name to use to select a port
+ * @returns The selected port number
+ */
+const portByName = (name: string) => {
+  const rangeOffset = 49151;
+  const rangeEnd = 65535;
+  const rangeLength = rangeEnd - rangeOffset;
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    const char = name.charCodeAt(i);
+    hash = ((hash << 5) - hash + char) % rangeLength;
+  }
+  return hash + rangeOffset;
+};
+
+const devServerPort = portByName("jira-sparkboard");
 
 const config = (
   _env: Record<string, string>,
   { mode }: { mode: Configuration["mode"] },
 ): Configuration => {
   return {
-    entry: "./src/index.ts",
+    entry: "./src/index.tsx",
 
     devtool: "inline-source-map",
 
     devServer: {
       server: "https",
+      port: devServerPort,
       allowedHosts: "all",
       static: {
         directory: "dist",
@@ -28,7 +55,7 @@ const config = (
         logging: "verbose",
         webSocketURL: {
           hostname: "localhost",
-          port: 8080,
+          port: devServerPort,
         },
       },
     },
@@ -49,7 +76,6 @@ const config = (
     },
 
     plugins: [
-      new HotModuleReplacementPlugin(),
       new WebpackUserscript({
         // NB: renameExt breaks HMR by renaming the hot-update output.
         renameExt: false,
@@ -60,7 +86,8 @@ const config = (
     output: {
       filename: "bundle.user.js",
       path: resolve(__dirname, "dist"),
-      publicPath: mode === "development" ? "https://localhost:8080/" : "auto",
+      publicPath:
+        mode === "development" ? `https://localhost:${devServerPort}/` : "auto",
     },
     resolveLoader: {
       plugins: [PnpWebpackPlugin.moduleLoader(module)],

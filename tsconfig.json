@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "./dist/",
-    "sourceMap": true,
     "module": "CommonJS",
     "target": "es5",
     "allowJs": true,
