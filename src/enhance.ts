@@ -68,6 +68,7 @@ const enhance = (
 
   observer.observe(win.document.body, { childList: true, subtree: true });
 
+  // dehance()
   return () => {
     enhancedElementsCleanups.forEach((cleanup, element) => {
       cleanup?.();
@@ -75,9 +76,8 @@ const enhance = (
         element.shadowRoot.innerHTML = "<slot/>";
       }
       dehancedElements.add(element);
+      observer.disconnect();
     });
-
-    // TODO: Dispose of observer
   };
 };
 

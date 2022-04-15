@@ -1,4 +1,4 @@
-import { createRoot, Root } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import enhance from "./enhance";
 
 const Component = () => (
@@ -7,13 +7,14 @@ const Component = () => (
   </>
 );
 
-let root: Root;
-
 const dehance = enhance(
   "h1",
-  (shadowRoot: ShadowRoot): void => {
-    root = createRoot(shadowRoot);
+  (shadowRoot) => {
+    const root = createRoot(shadowRoot);
     root.render(<Component />);
+    return () => {
+      root.unmount();
+    };
   },
   window,
 );
@@ -21,9 +22,6 @@ const dehance = enhance(
 // Hot Module Replacement Support:
 
 if (module.hot) {
-  module.hot.dispose(() => {
-    root.unmount();
-    dehance();
-  });
+  module.hot.dispose(dehance);
   module.hot.accept();
 }
