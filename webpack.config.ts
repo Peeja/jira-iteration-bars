@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { Configuration } from "webpack";
 import PnpWebpackPlugin = require("pnp-webpack-plugin");
 import WebpackUserscript = require("webpack-userscript");
+import ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 import "webpack-dev-server";
 
 /**
@@ -64,8 +65,7 @@ const config = (
       rules: [
         {
           test: /\.tsx?$/,
-          use: require.resolve("ts-loader"),
-          exclude: /node_modules/,
+          use: "babel-loader",
         },
       ],
     },
@@ -76,6 +76,7 @@ const config = (
     },
 
     plugins: [
+      new ReactRefreshWebpackPlugin(),
       new WebpackUserscript({
         // NB: renameExt breaks HMR by renaming the hot-update output.
         renameExt: false,

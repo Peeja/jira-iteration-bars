@@ -1,11 +1,6 @@
 import { createRoot } from "react-dom/client";
+import { Component } from "./Component";
 import enhance from "./enhance";
-
-const Component = () => (
-  <>
-    <span style={{ color: "red" }}>Hello</span>, world!
-  </>
-);
 
 const dehance = enhance(
   "h1",
