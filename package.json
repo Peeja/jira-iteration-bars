@@ -18,7 +18,7 @@
     "@types/jsdom": "^16.2.14",
     "@types/node": "^17.0.23",
     "@types/prettier": "^2",
-    "@types/webpack": "^5.28.0",
+    "@types/webpack": "^4.41.32",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
