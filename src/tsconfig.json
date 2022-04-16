@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "es6",
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "esModuleInterop": true
+  },
+  "include": ["**/*", "../typings/*", "../matchers/*"]
+}

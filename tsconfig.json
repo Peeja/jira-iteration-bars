@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es6",
-    "module": "es6",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx"
+    "module": "CommonJS",
+    "target": "es5",
+    "allowJs": true,
+    "moduleResolution": "node"
   },
-  "include": ["**/*"]
+  "include": ["*", "typings/*"]
 }

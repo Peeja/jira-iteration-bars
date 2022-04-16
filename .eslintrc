@@ -1,26 +1,26 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["eslint:recommended"],
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "rules": {
+    "@typescript-eslint/no-namespace": ["warn", { "allowDeclarations": true }],
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
   "overrides": [
     {
-      "files": "**/*.@(ts|tsx)",
-      "parserOptions": { "project": "tsconfig.json" },
-      "plugins": ["@typescript-eslint"],
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ],
-      "rules": {
-        "@typescript-eslint/no-namespace": [
-          "warn",
-          { "allowDeclarations": true }
-        ],
-        "@typescript-eslint/no-empty-function": "warn"
-      }
+      "files": ["src/**/*.@(ts|tsx)", "typings/*"],
+      "parserOptions": { "project": "src/tsconfig.json" }
     },
     {
-      "files": "rollup.conf.js",
+      "files": "./*",
+      "parserOptions": { "project": "tsconfig.json" },
       "env": { "node": true }
     }
-  ]
+  ],
+  "ignorePatterns": "dist/**"
 }

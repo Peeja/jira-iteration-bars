@@ -11,23 +11,25 @@
  */
 const dehancedElements = new WeakSet<Element>();
 
+type Cleanup = () => void;
+
 const enhanceElement = (
   element: Element,
-  customizeShadow: (shadowRoot: ShadowRoot) => void,
-  enhancedElements: Set<Element>,
+  customizeShadow: (shadowRoot: ShadowRoot) => void | Cleanup,
+  enhancedElementsCleanups: Map<Element, Cleanup | null>,
 ) => {
   if (element.shadowRoot && !dehancedElements.has(element)) {
     console.error("Element already has a shadowRoot:", element);
     return;
   } else {
-    enhancedElements.add(element);
     dehancedElements.delete(element);
     const shadowRoot =
       element.shadowRoot ?? element.attachShadow({ mode: "open" });
     while (shadowRoot.firstChild) {
       shadowRoot.removeChild(shadowRoot.firstChild);
     }
-    customizeShadow(shadowRoot);
+    const cleanup = customizeShadow(shadowRoot);
+    enhancedElementsCleanups.set(element, cleanup ?? null);
   }
 };
 
@@ -40,12 +42,12 @@ const enhance = (
 ) => {
   /**
    * Elements which this enhance() has enhanced, and which it will need to
-   * dehance later.
+   * dehance later, mapped to their cleanup functions.
    */
-  const enhancedElements = new Set<Element>();
+  const enhancedElementsCleanups = new Map<Element, Cleanup | null>();
 
   win.document.querySelectorAll(selector).forEach((heading) => {
-    enhanceElement(heading, customizeShadow, enhancedElements);
+    enhanceElement(heading, customizeShadow, enhancedElementsCleanups);
   });
 
   const observer = new win.MutationObserver(function (mutations) {
@@ -53,11 +55,11 @@ const enhance = (
       mutation.addedNodes.forEach((node) => {
         if (node instanceof win.Element) {
           if (node.matches(selector)) {
-            enhanceElement(node, customizeShadow, enhancedElements);
+            enhanceElement(node, customizeShadow, enhancedElementsCleanups);
           }
 
           node.querySelectorAll(selector).forEach((child) => {
-            enhanceElement(child, customizeShadow, enhancedElements);
+            enhanceElement(child, customizeShadow, enhancedElementsCleanups);
           });
         }
       });
@@ -66,14 +68,16 @@ const enhance = (
 
   observer.observe(win.document.body, { childList: true, subtree: true });
 
+  // dehance()
   return () => {
-    enhancedElements.forEach((element) => {
+    enhancedElementsCleanups.forEach((cleanup, element) => {
+      cleanup?.();
       if (element.shadowRoot) {
         element.shadowRoot.innerHTML = "<slot/>";
       }
       dehancedElements.add(element);
+      observer.disconnect();
     });
-    // TODO: Dispose of observer
   };
 };
 
