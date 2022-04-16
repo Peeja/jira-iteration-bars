@@ -15,7 +15,7 @@ type Cleanup = () => void;
 
 const enhanceElement = (
   element: Element,
-  customizeShadow: (shadowRoot: ShadowRoot) => void | Cleanup,
+  customizeShadow: (shadowRoot: ShadowRoot) => Cleanup | undefined,
   enhancedElementsCleanups: Map<Element, Cleanup | null>,
 ) => {
   if (element.shadowRoot && !dehancedElements.has(element)) {
@@ -29,13 +29,16 @@ const enhanceElement = (
       shadowRoot.removeChild(shadowRoot.firstChild);
     }
     const cleanup = customizeShadow(shadowRoot);
-    enhancedElementsCleanups.set(element, cleanup ?? null);
+    enhancedElementsCleanups.set(element, cleanup || null);
   }
 };
 
 const enhance = (
   selector: string,
-  customizeShadow: (shadowRoot: ShadowRoot) => void,
+  // Unfortunately, customizeShadow requires an explicit `return` or `return
+  // undefined` to have no cleanup function in TypeScript, until
+  // <https://github.com/microsoft/TypeScript/issues/36288> is implemented.
+  customizeShadow: (shadowRoot: ShadowRoot) => Cleanup | undefined,
   // Be selective in what we require, because it's hard to make the various
   // concepts of "Window" agree on everything.
   win: Pick<typeof window, "document" | "MutationObserver" | "Element">,
