@@ -4,6 +4,7 @@ import PnpWebpackPlugin = require("pnp-webpack-plugin");
 import WebpackUserscript = require("webpack-userscript");
 import ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 import "webpack-dev-server";
+import includeRegExp from "./includeRegExp";
 
 /**
  * Selects a port in the Ephemeral range by deterministically hashing a string
@@ -80,7 +81,9 @@ const config = (
       new WebpackUserscript({
         // NB: renameExt breaks HMR by renaming the hot-update output.
         renameExt: false,
-        headers: { include: "https://example.com/" },
+        headers: {
+          include: includeRegExp.toString(),
+        },
       }),
     ],
 

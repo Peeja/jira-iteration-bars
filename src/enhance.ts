@@ -45,12 +45,12 @@ const enhance = (
 ) => {
   /**
    * Elements which this enhance() has enhanced, and which it will need to
-   * dehance later, mapped to their cleanup functions.
+   * dehance later, mapped to their cleanup functions (if any).
    */
-  const enhancedElementsCleanups = new Map<Element, Cleanup | null>();
+  const enhancedElementCleanups = new Map<Element, Cleanup | null>();
 
-  win.document.querySelectorAll(selector).forEach((heading) => {
-    enhanceElement(heading, customizeShadow, enhancedElementsCleanups);
+  win.document.querySelectorAll(selector).forEach((element) => {
+    enhanceElement(element, customizeShadow, enhancedElementCleanups);
   });
 
   const observer = new win.MutationObserver(function (mutations) {
@@ -58,11 +58,11 @@ const enhance = (
       mutation.addedNodes.forEach((node) => {
         if (node instanceof win.Element) {
           if (node.matches(selector)) {
-            enhanceElement(node, customizeShadow, enhancedElementsCleanups);
+            enhanceElement(node, customizeShadow, enhancedElementCleanups);
           }
 
           node.querySelectorAll(selector).forEach((child) => {
-            enhanceElement(child, customizeShadow, enhancedElementsCleanups);
+            enhanceElement(child, customizeShadow, enhancedElementCleanups);
           });
         }
       });
@@ -73,7 +73,7 @@ const enhance = (
 
   // dehance()
   return () => {
-    enhancedElementsCleanups.forEach((cleanup, element) => {
+    enhancedElementCleanups.forEach((cleanup, element) => {
       cleanup?.();
       if (element.shadowRoot) {
         element.shadowRoot.innerHTML = "<slot/>";

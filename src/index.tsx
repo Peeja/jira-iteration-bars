@@ -1,12 +1,27 @@
 import { createRoot } from "react-dom/client";
-import { Component } from "./Component";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 import enhance from "./enhance";
+import { Sparkboard } from "./Sparkboard";
 
 const dehance = enhance(
-  "h1",
+  ".ghx-issue",
   (shadowRoot) => {
     const root = createRoot(shadowRoot);
-    root.render(<Component />);
+    const cache = createCache({
+      key: "css",
+      // Waiting on: https://github.com/emotion-js/emotion/pull/2728
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+      container: shadowRoot as any,
+    });
+    root.render(
+      <>
+        <slot />
+        <CacheProvider value={cache}>
+          <Sparkboard />
+        </CacheProvider>
+      </>,
+    );
     return () => {
       root.unmount();
     };
