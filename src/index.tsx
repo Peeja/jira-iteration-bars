@@ -1,8 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import { QueryClient, QueryClientProvider } from "react-query";
 import enhance from "./enhance";
 import { Sparkboard } from "./Sparkboard";
+
+const queryClient = new QueryClient();
 
 const dehance = enhance(
   ".ghx-issue",
@@ -14,12 +17,15 @@ const dehance = enhance(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
       container: shadowRoot as any,
     });
+    const issueKey = shadowRoot.host.getAttribute("data-issue-key");
     root.render(
       <>
         <slot />
-        <CacheProvider value={cache}>
-          <Sparkboard />
-        </CacheProvider>
+        <QueryClientProvider client={queryClient}>
+          <CacheProvider value={cache}>
+            {issueKey && <Sparkboard issueKey={issueKey} />}
+          </CacheProvider>
+        </QueryClientProvider>
       </>,
     );
     return () => {
