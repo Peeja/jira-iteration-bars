@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import enhance from "./enhance";
 import { Sparkboard } from "./Sparkboard";
 
@@ -35,9 +36,31 @@ const dehance = enhance(
   window,
 );
 
-// Hot Module Replacement Support:
+if (process.env.NODE_ENV === "development") {
+  const dehanceDevTools = enhance(
+    "body",
+    (shadowRoot) => {
+      const root = createRoot(shadowRoot);
+      root.render(
+        <>
+          <slot />
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </>,
+      );
+      return () => {
+        root.unmount();
+      };
+    },
+    window,
+  );
 
-if (module.hot) {
-  module.hot.dispose(dehance);
-  module.hot.accept();
+  // Hot Module Replacement Support:
+
+  if (module.hot) {
+    module.hot.dispose(dehance);
+    module.hot.dispose(dehanceDevTools);
+    module.hot.accept();
+  }
 }
