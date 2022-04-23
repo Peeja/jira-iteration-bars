@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { groupBy, map } from "lodash-es";
-import { useQuery } from "react-query";
+import columnsOfIssues from "./columnsOfIssues";
+import { useBoardConfigQuery, useChildIssuesQuery } from "./queries";
 
 const Container = styled.div`
   display: flex;
@@ -31,62 +31,26 @@ const Card = styled.div<{ statusCategoryId: number }>`
         "#42526E"};
 `;
 
-interface SearchResult {
-  startAt: number;
-  maxResults: number;
-  total: number;
-  issues: {
-    expand: string;
-    id: string;
-    self: string;
-    key: string;
-    fields: {
-      status: {
-        self: string;
-        description: string;
-        iconUrl: string;
-        name: string;
-        id: string;
-        statusCategory: {
-          self: string;
-          id: number;
-          key: string;
-          colorName: string;
-          name: string;
-        };
-      };
-    };
-  }[];
-}
-
 export const Sparkboard = ({ issueKey }: { issueKey: string }) => {
-  const { isLoading, error, data } = useQuery<SearchResult>(
-    ["childIssues", issueKey],
-    () =>
-      fetch(
-        `/rest/api/3/search?jql=${encodeURIComponent(
-          `"Epic Link" = ${issueKey}`,
-        )}&fields=status`,
-      ).then((res) => res.json()),
-  );
+  const boardConfigQuery = useBoardConfigQuery(54);
+  const childIssuesQuery = useChildIssuesQuery(issueKey);
 
-  if (isLoading) return <>Loading...</>;
+  if (childIssuesQuery.isLoading || boardConfigQuery.isLoading)
+    return <>Loading...</>;
 
-  if (error) {
-    console.log(error);
+  if (childIssuesQuery.isError || boardConfigQuery.isError) {
+    console.log(childIssuesQuery.error ?? boardConfigQuery.error);
     return null;
   }
 
-  const issuesByStatus = groupBy(
-    data?.issues,
-    (issue) => issue.fields.status.id,
-  );
-
   return (
     <Container>
-      {map(issuesByStatus, (issues) => (
+      {columnsOfIssues(
+        boardConfigQuery.data.currentViewConfig.columns,
+        childIssuesQuery.data.issues,
+      ).map((columnIssues) => (
         <Column>
-          {issues.map((issue) => (
+          {columnIssues.map((issue) => (
             <Card
               title={issue.key}
               statusCategoryId={issue.fields.status.statusCategory.id}
