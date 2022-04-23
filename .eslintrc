@@ -13,6 +13,7 @@
       "warn",
       { "argsIgnorePattern": "^_" }
     ],
+    "@typescript-eslint/no-unnecessary-condition": "warn",
     "arrow-body-style": "warn"
   },
   "overrides": [
